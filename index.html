@@ -5,27 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- SEO Primary -->
-  <title>SISPPMUG - Sindicato dos Servidores Públicos Municipais de Guarapuava</title>
-  <meta name="description" content="Site oficial do SISPPMUG. Defesa, estatutos, editais, leis municipais e convênios para os servidores e professores públicos de Guarapuava - PR.">
+  <title>SISPPMUG - Sindicato dos Servidores Públicos e Professores Municipais de Guarapuava</title>
+  <meta name="description" content="Site oficial do SISPPMUG. Defesa dos direitos dos servidores e professores municipais de Guarapuava - PR. Consultas de estatuto, leis municipais e convênios.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.sisppmug.com.br/">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.sisppmug.com.br/">
   <meta property="og:title" content="SISPPMUG - Sindicato dos Servidores Públicos de Guarapuava">
   <meta property="og:description" content="Acesse editais, estatuto, notícias, leis e convênios dos servidores municipais de Guarapuava.">
   <meta property="og:image" content="https://raw.githubusercontent.com/dev-cassiowinkler/sisppmug/refs/heads/main/logo.png">
 
-  <!-- Performance Preconnects -->
-  <link rel="preconnect" href="https://raw.githubusercontent.com">
-  <link rel="preconnect" href="https://static.wixstatic.com">
-
-  <!-- Schema.org Structured Data -->
+  <!-- Schema.org Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "GovernmentPermit",
+    "@type": "LaborUnion",
     "name": "SISPPMUG",
     "url": "https://www.sisppmug.com.br/",
     "logo": "https://raw.githubusercontent.com/dev-cassiowinkler/sisppmug/refs/heads/main/logo.png",
@@ -34,7 +30,7 @@
       "streetAddress": "Rua Visconde de Guarapuava, 1185",
       "addressLocality": "Guarapuava",
       "addressRegion": "PR",
-      "country": "BR"
+      "addressCountry": "BR"
     },
     "contactPoint": {
       "@type": "ContactPoint",
@@ -46,323 +42,107 @@
   </script>
 
   <style>
-    /* CSS RESET & VARIAVEIS */
     :root {
-      --primary: #003366;       /* Azul Institucional */
+      --primary: #003366;       
       --primary-dark: #002244;  
-      --secondary: #d9534f;     /* Vermelho Destaque/Ação */
+      --secondary: #d9534f;     
       --text-dark: #222222;
       --text-light: #555555;
       --bg-light: #f4f6f9;
       --white: #ffffff;
-      --max-width: 1200px;
+      --border-color: #e0e0e0;
+      --max-width: 1100px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--text-dark); background-color: var(--white); line-height: 1.6; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+
+    /* TOP BAR & HEADER */
+    .top-bar { background-color: var(--primary-dark); color: var(--white); font-size: 0.85rem; padding: 8px 0; }
+    .top-bar .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+
+    header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; }
+    .header-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+    .logo img { height: 55px; width: auto; }
+
+    nav ul { display: flex; list-style: none; gap: 20px; }
+    nav a { font-weight: 600; font-size: 0.95rem; color: var(--primary); padding: 5px 0; cursor: pointer; transition: color 0.2s; }
+    nav a:hover, nav a.active { color: var(--secondary); border-bottom: 2px solid var(--secondary); }
+
+    /* NAVEGAÇÃO SPA (SEÇÕES) */
+    .page-section { display: none; padding: 50px 0; }
+    .page-section.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text-dark);
-      background-color: var(--white);
-      line-height: 1.6;
-    }
+    /* ELEMENTOS COMUNS */
+    .section-title { text-align: center; font-size: 1.8rem; color: var(--primary); margin-bottom: 30px; position: relative; }
+    .section-title::after { content: ''; display: block; width: 50px; height: 3px; background: var(--secondary); margin: 8px auto 0; }
 
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
+    .btn { display: inline-block; text-align: center; padding: 12px 24px; background-color: var(--primary); color: var(--white); font-weight: 600; border-radius: 4px; border: none; cursor: pointer; transition: background 0.2s; }
+    .btn:hover { background-color: var(--primary-dark); }
+    .btn-secondary { background-color: var(--secondary); }
+    .btn-secondary:hover { background-color: #c9302c; }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    /* HOME SECTION */
+    .hero { background-color: var(--primary); color: var(--white); overflow: hidden; text-align: center; }
+    .hero-img { width: 100%; max-height: 400px; object-fit: cover; }
 
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
+    .card { background: var(--white); border-radius: 6px; padding: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-top: 4px solid var(--primary); border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; }
+    .card h3 { color: var(--primary); margin-bottom: 15px; }
 
-    /* HEADER & NAVEGAÇÃO */
-    .top-bar {
-      background-color: var(--primary-dark);
-      color: var(--white);
-      font-size: 0.85rem;
-      padding: 8px 0;
-    }
+    /* PÁGINA SOBRE */
+    .about-content { max-width: 850px; margin: 0 auto; line-height: 1.8; color: var(--text-dark); }
+    .about-content p { margin-bottom: 18px; }
 
-    .top-bar .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+    /* PÁGINA LEIS E DOCUMENTOS */
+    .search-box { width: 100%; max-width: 500px; margin: 0 auto 30px; display: block; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+    .law-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+    .law-item { background: var(--bg-light); padding: 20px; border-radius: 6px; border-left: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+    .law-item h4 { color: var(--primary); font-size: 1.1rem; }
+    .law-item p { color: var(--text-light); font-size: 0.9rem; }
 
-    header {
-      background: var(--white);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .header-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-    }
-
-    .logo img {
-      height: 60px;
-      width: auto;
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 25px;
-    }
-
-    nav a {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--primary);
-      transition: color 0.2s;
-    }
-
-    nav a:hover, nav a.active {
-      color: var(--secondary);
-    }
-
-    /* BANNER PRINCIPAL */
-    .hero {
-      position: relative;
-      background-color: var(--primary);
-      color: var(--white);
-      overflow: hidden;
-    }
-
-    .hero-img {
-      width: 100%;
-      max-height: 450px;
-      object-fit: cover;
-      opacity: 0.9;
-    }
-
-    /* DESTAQUES / DOCUMENTOS (Estatuto e Eleição) */
-    .highlights {
-      padding: 60px 0;
-      background-color: var(--bg-light);
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 1.8rem;
-      color: var(--primary);
-      margin-bottom: 40px;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 3px;
-      background: var(--secondary);
-      margin: 10px auto 0;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .card {
-      background: var(--white);
-      border-radius: 6px;
-      padding: 30px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      border-top: 4px solid var(--primary);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card h3 {
-      color: var(--primary);
-      margin-bottom: 15px;
-      font-size: 1.3rem;
-    }
-
-    .card p {
-      color: var(--text-light);
-      margin-bottom: 20px;
-      font-size: 0.95rem;
-    }
-
-    .btn {
-      display: inline-block;
-      text-align: center;
-      padding: 12px 24px;
-      background-color: var(--primary);
-      color: var(--white);
-      font-weight: 600;
-      border-radius: 4px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .btn:hover {
-      background-color: var(--primary-dark);
-    }
-
-    .btn-secondary {
-      background-color: var(--secondary);
-    }
-
-    .btn-secondary:hover {
-      background-color: #c9302c;
-    }
+    /* PÁGINA CONVÊNIOS */
+    .convenio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .convenio-card { background: var(--white); border: 1px solid var(--border-color); border-radius: 6px; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+    .convenio-card h4 { color: var(--primary); margin-bottom: 10px; }
+    .convenio-card span { display: inline-block; background: var(--bg-light); color: var(--text-light); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 10px; }
 
     /* FORMULÁRIO DE CONTATO */
-    .contact-section {
-      padding: 60px 0;
-    }
-
-    .contact-wrapper {
-      max-width: 700px;
-      margin: 0 auto;
-      background: var(--white);
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      border: 1px solid #eee;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--primary);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
+    .contact-wrapper { max-width: 650px; margin: 0 auto; background: var(--white); padding: 35px; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: var(--primary); }
+    .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
 
     /* FOOTER & MAPA */
-    footer {
-      background-color: var(--primary-dark);
-      color: var(--white);
-      padding-top: 50px;
-    }
+    footer { background-color: var(--primary-dark); color: var(--white); padding-top: 40px; margin-top: 40px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding-bottom: 30px; }
+    .footer-info h4 { font-size: 1.1rem; margin-bottom: 15px; }
+    .footer-info p { margin-bottom: 8px; color: #ccc; font-size: 0.9rem; }
+    .map-container { width: 100%; height: 180px; border-radius: 4px; overflow: hidden; }
+    .footer-bottom { background-color: rgba(0, 0, 0, 0.2); text-align: center; padding: 15px 0; font-size: 0.85rem; color: #aaa; }
 
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 40px;
-      padding-bottom: 40px;
-    }
+    /* BOTÃO WHATSAPP */
+    .whatsapp-btn { position: fixed; bottom: 25px; right: 25px; background-color: #25d366; color: white; border-radius: 50px; padding: 12px 20px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px; z-index: 9999; }
 
-    .footer-info h4 {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      color: var(--white);
-    }
-
-    .footer-info p {
-      margin-bottom: 10px;
-      color: #ccc;
-      font-size: 0.95rem;
-    }
-
-    .map-container {
-      width: 100%;
-      height: 200px;
-      border: 0;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .footer-bottom {
-      background-color: rgba(0, 0, 0, 0.2);
-      text-align: center;
-      padding: 20px 0;
-      font-size: 0.85rem;
-      color: #aaa;
-    }
-
-    /* BOTÃO FLUTUANTE WHATSAPP */
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background-color: #25d366;
-      color: white;
-      border-radius: 50px;
-      padding: 12px 20px;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      z-index: 9999;
-      transition: transform 0.2s;
-    }
-
-    .whatsapp-btn:hover {
-      transform: scale(1.05);
-      color: white;
-    }
-
-    /* MEDIA QUERIES (RESPONSIVIDADE) */
     @media (max-width: 768px) {
-      .header-container {
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-      }
-
-      .top-bar .container {
-        justify-content: center;
-        text-align: center;
-      }
+      .header-container { flex-direction: column; gap: 15px; }
+      nav ul { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .law-item { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <!-- BARRA SUPERIOR DE INFORMAÇÃO -->
+  <!-- BARRA SUPERIOR -->
   <div class="top-bar">
     <div class="container">
       <span>📍 Rua Visconde de Guarapuava, 1185, Guarapuava - PR</span>
@@ -370,40 +150,39 @@
     </div>
   </div>
 
-  <!-- CABEÇALHO -->
+  <!-- CABEÇALHO COM NAVEGAÇÃO -->
   <header>
     <div class="container header-container">
-      <a href="/" class="logo">
-        <img src="https://raw.githubusercontent.com/dev-cassiowinkler/sisppmug/refs/heads/main/logo.png" alt="Logo SISPPMUG" width="200" height="60">
+      <a onclick="navigateTo('home')" class="logo" style="cursor:pointer;">
+        <img src="https://raw.githubusercontent.com/dev-cassiowinkler/sisppmug/refs/heads/main/logo.png" alt="Logo SISPPMUG" width="180" height="55">
       </a>
       <nav>
         <ul>
-          <li><a href="/" class="active">Home</a></li>
-          <li><a href="https://www.sisppmug.com.br/sobre">Sobre</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="https://www.sisppmug.com.br/convenios">Convênios</a></li>
-          <li><a href="https://www.sisppmug.com.br/leis">Leis Municipais</a></li>
-          <li><a href="#contato">Contato</a></li>
+          <li><a id="nav-home" class="active" onclick="navigateTo('home')">Home</a></li>
+          <li><a id="nav-sobre" onclick="navigateTo('sobre')">Sobre</a></li>
+          <li><a id="nav-blog" onclick="navigateTo('blog')">Blog</a></li>
+          <li><a id="nav-convenios" onclick="navigateTo('convenios')">Convênios</a></li>
+          <li><a id="nav-leis" onclick="navigateTo('leis')">Leis Municipais</a></li>
+          <li><a id="nav-contato" onclick="navigateTo('contato')">Contato</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- BANNER PRINCIPAL -->
-  <section class="hero">
-    <img src="https://static.wixstatic.com/media/5efdc8_ae18d1f5c6a742f3b5b8775afba53c9a~mv2.png/v1/fill/w_1585,h_637,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5efdc8_ae18d1f5c6a742f3b5b8775afba53c9a~mv2.png" alt="Banner SISPPMUG" class="hero-img" width="1585" height="637" fetchpriority="high">
-  </section>
+  <!-- PÁGINA: HOME -->
+  <main id="page-home" class="page-section active">
+    <section class="hero">
+      <img src="https://static.wixstatic.com/media/5efdc8_ae18d1f5c6a742f3b5b8775afba53c9a~mv2.png/v1/fill/w_1585,h_637,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5efdc8_ae18d1f5c6a742f3b5b8775afba53c9a~mv2.png" alt="Banner SISPPMUG" class="hero-img" width="1585" height="637" fetchpriority="high">
+    </section>
 
-  <!-- SEÇÃO DE DESTAQUES E DOCUMENTOS -->
-  <section class="highlights">
-    <div class="container">
-      <h2 class="section-title">Informaçoes e Documentos Oficiais</h2>
+    <div class="container" style="padding-top: 40px;">
+      <h2 class="section-title">Documentos e Convocatórias Oficiais</h2>
       <div class="cards-grid">
         
         <div class="card">
           <div>
             <h3>Estatuto SISPPMUG</h3>
-            <p>Acesse o estatuto oficial do Sindicato dos Servidores Públicos e Professores Municipais de Guarapuava para entender nossos direitos e deveres.</p>
+            <p>Acesse o estatuto oficial do Sindicato dos Servidores Públicos e Professores Municipais de Guarapuava com as regras, diretos e deveres organizacionais.</p>
           </div>
           <a href="https://www.sisppmug.com.br/_files/ugd/5efdc8_b3f97c3fd93049d8afcf61eb4673f001.pdf" target="_blank" rel="noopener noreferrer" class="btn">Visualizar Estatuto (PDF)</a>
         </div>
@@ -411,24 +190,108 @@
         <div class="card">
           <div>
             <h3>Edital de Convocação de Eleição</h3>
-            <p>Confira o Edital de Convocação Oficial para a eleição da diretoria e conselho fiscal do sindicato com todas as diretrizes.</p>
+            <p>Confira o Edital Oficial de Convocação de Eleição para o SISPPMUG com prazos, regras de inscrição de chapas e votação.</p>
           </div>
           <a href="https://www.sisppmug.com.br/_files/ugd/5efdc8_8bf0348909024772a0e7b242d0bab4df.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Baixar Edital (PDF)</a>
         </div>
 
       </div>
     </div>
+  </main>
+
+  <!-- PÁGINA: SOBRE -->
+  <section id="page-sobre" class="page-section">
+    <div class="container">
+      <h2 class="section-title">Sobre o SISPPMUG</h2>
+      <div class="about-content">
+        <p>O <strong>SISPPMUG</strong> (Sindicato dos Servidores Públicos e Professores Municipais de Guarapuava) é a entidade representativa que atua incansavelmente na defesa dos direitos, valorização profissional e melhores condições de trabalho para todos os servidores da rede pública municipal e professores de Guarapuava - PR.</p>
+        <p>Nossa missão é promover a união da categoria, representar as demandas trabalhistas perante o Poder Público, assegurar o cumprimento do plano de cargos e carreiras, e oferecer benefícios concretos através de convênios em diversas áreas como saúde, educação e serviços.</p>
+        <p>Trabalhamos com transparência, responsabilidade ética e compromisso com o avanço do serviço público municipal.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- SEÇÃO FORMULÁRIO DE CONTATO -->
-  <section class="contact-section" id="contato">
+  <!-- PÁGINA: BLOG -->
+  <section id="page-blog" class="page-section">
+    <div class="container">
+      <h2 class="section-title">Blog e Notícias</h2>
+      <p style="text-align: center; color: var(--text-light); margin-bottom: 30px;">Fique por dentro das últimas atualizações, comunicados da diretoria e novidades da categoria.</p>
+      
+      <div class="cards-grid">
+        <div class="card">
+          <div>
+            <span style="font-size:0.8rem; color:var(--secondary); font-weight:bold;">COMUNICADO</span>
+            <h3 style="margin-top:5px;">Informativo sobre os Direitos e Assembleias Gerais</h3>
+            <p>Acompanhe os relatórios das reuniões com a administração municipal e pautas de reivindicações atualizadas.</p>
+          </div>
+          <a onclick="navigateTo('contato')" class="btn" style="margin-top:15px;">Mais Informações</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PÁGINA: CONVÊNIOS -->
+  <section id="page-convenios" class="page-section">
+    <div class="container">
+      <h2 class="section-title">Nossos Convênios</h2>
+      <p style="text-align: center; color: var(--text-light); margin-bottom: 30px;">Confira as empresas e parceiros que oferecem descontos e benefícios exclusivos para os filiados do SISPPMUG.</p>
+      
+      <div class="convenio-grid">
+        <div class="convenio-card">
+          <span>SAÚDE & BEM-ESTAR</span>
+          <h4>Clínicas Médicas e Odontológicas</h4>
+          <p>Descontos especiais em consultas e exames laboratoriais na região de Guarapuava.</p>
+        </div>
+        <div class="convenio-card">
+          <span>EDUCAÇÃO</span>
+          <h4>Instituições de Ensino</h4>
+          <p>Parcerias com faculdades e escolas para descontos na mensalidade de filiados e dependentes.</p>
+        </div>
+        <div class="convenio-card">
+          <span>SERVIÇOS</span>
+          <h4>Comércio e Serviços Locais</h4>
+          <p>Condições facilitadas em farmácias, postos de combustível e lojas credenciadas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PÁGINA: LEIS MUNICIPAIS -->
+  <section id="page-leis" class="page-section">
+    <div class="container">
+      <h2 class="section-title">Leis Municipais</h2>
+      <p style="text-align: center; color: var(--text-light); margin-bottom: 20px;">Consulte a legislação municipal, estatutos do servidor e planos de cargos do município de Guarapuava.</p>
+      
+      <input type="text" id="lawSearch" class="search-box" onkeyup="filterLaws()" placeholder="🔍 Buscar lei ou assunto (ex: estatuto, plano, carreira)...">
+
+      <ul class="law-list" id="lawList">
+        <li class="law-item">
+          <div>
+            <h4>Estatuto do Servidor Público Municipal</h4>
+            <p>Regulamenta os direitos, deveres e regime jurídico dos servidores municipais de Guarapuava.</p>
+          </div>
+          <a href="https://www.sisppmug.com.br/_files/ugd/5efdc8_b3f97c3fd93049d8afcf61eb4673f001.pdf" target="_blank" class="btn">Acessar PDF</a>
+        </li>
+        <li class="law-item">
+          <div>
+            <h4>Plano de Cargos, Carreiras e Vencimentos (PCCV)</h4>
+            <p>Diretrizes de progressão funcional e tabela salarial dos servidores e professores.</p>
+          </div>
+          <a href="https://www.sisppmug.com.br/leis" target="_blank" class="btn">Consultar Leis</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PÁGINA / SEÇÃO: CONTATO -->
+  <section id="page-contato" class="page-section">
     <div class="container">
       <div class="contact-wrapper">
         <h2 class="section-title">Entre em Contato</h2>
-        <form action="#" method="POST">
+        <form action="#" method="POST" onsubmit="handleFormSubmit(event)">
           <div class="form-group">
             <label for="nome">Nome Completo</label>
-            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
           </div>
           <div class="form-group">
             <label for="email">E-mail</label>
@@ -436,11 +299,11 @@
           </div>
           <div class="form-group">
             <label for="telefone">Telefone / WhatsApp</label>
-            <input type="tel" id="telefone" name="telefone" placeholder="(42) 00000-0000">
+            <input type="tel" id="telefone" name="telefone" placeholder="(42) 90000-0000">
           </div>
           <div class="form-group">
             <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Como podemos ajudar?" required></textarea>
+            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Digite sua mensagem ou dúvida aqui..." required></textarea>
           </div>
           <button type="submit" class="btn" style="width: 100%;">Enviar Mensagem</button>
         </form>
@@ -452,7 +315,6 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        
         <div class="footer-info">
           <h4>SISPPMUG</h4>
           <p>Sindicato dos Servidores Públicos e Professores Municipais de Guarapuava.</p>
@@ -462,20 +324,14 @@
         </div>
 
         <div class="footer-info">
-          <h4>Localização</h4>
+          <h4>Localização no Mapa</h4>
           <div class="map-container">
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.2868285511675!2d-51.46824362378909!3d-25.395221931410625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ef363212bc2ff1%3A0x6b8b08cd6e553a20!2sR.%20Visc.%20de%20Guarapuava%2C%201185%20-%20Centro%2C%20Guarapuava%20-%20PR!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
-              width="100%" 
-              height="200" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade">
+              width="100%" height="180" style="border:0;" allowfullscreen="" loading="lazy">
             </iframe>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -487,9 +343,52 @@
   </footer>
 
   <!-- BOTÃO FLUTUANTE WHATSAPP -->
-  <a href="https://wa.me/554288085359" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Contato via WhatsApp">
-    💬 Atendimento WhatsApp
+  <a href="https://wa.me/554288085359" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+    💬 Contato WhatsApp
   </a>
+
+  <!-- ROUTER E SCRIPTS -->
+  <script>
+    // Navegação entre páginas sem recarregar
+    function navigateTo(pageId) {
+      // Ocultar todas as seções
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      // Remover classe ativa dos links do menu
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => link.classList.remove('active'));
+
+      // Exibir página solicitada
+      const targetPage = document.getElementById('page-' + pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+        const activeNav = document.getElementById('nav-' + pageId);
+        if (activeNav) activeNav.classList.add('active');
+      }
+
+      // Rolar suavemente para o topo
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Filtro de buscas na lista de Leis
+    function filterLaws() {
+      const input = document.getElementById('lawSearch').value.toLowerCase();
+      const items = document.querySelectorAll('#lawList .law-item');
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(input) ? 'flex' : 'none';
+      });
+    }
+
+    // Feedback do formulário de contato
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      alert('Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.');
+      event.target.reset();
+    }
+  </script>
 
 </body>
 </html>
