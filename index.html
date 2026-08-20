@@ -1475,7 +1475,7 @@
 
     <div class="footer-bottom">
       <div class="container">
-        <p>©2023 por Sisppmug - Todos os direitos reservados.</p>
+       <p>© <span id="current-year"></span> por Sisppmug - Todos os direitos reservados.</p>
       </div>
     </div>
   </footer>
@@ -1519,12 +1519,15 @@
     });
 
     // Inicialização ao carregar a página
-    document.addEventListener('DOMContentLoaded', function() {
-      const initialHash = window.location.hash.replace('#', '');
-      if (initialHash && document.getElementById('page-' + initialHash)) {
-        navigateTo(initialHash);
-      }
-    });
+   document.addEventListener('DOMContentLoaded', function() {
+  const initialHash = window.location.hash.replace('#', '');
+  if (initialHash && document.getElementById('page-' + initialHash)) {
+    navigateTo(initialHash);
+  }
+
+  // Atualiza automaticamente o ano do rodapé
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+});
 
     // Filtro interativo para Leis Municipais
     function filterLaws() {
